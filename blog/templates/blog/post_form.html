@@ -1,0 +1,44 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{  block.super }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="col-md-10">
+
+{#    <div class="content-section">#}
+{#        <div class="media">#}
+{#            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">#}
+{#                <div class="media-body">#}
+{#                    <h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>#}
+{#                    <p class="text-secondary">{{ user.email }}</p>#}
+{#                    <p class="text-secondary">Blog Post</p>#}
+{#                </div>#}
+{#      </div>#}
+
+
+      <form class="mt-4" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group mb-88">
+{#                <legend class="border-bottom mb-2 text-right">Blog Post</legend>#}
+                {{ form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+    </div>
+   </div>
+
+
+{% block sidebar %}
+
+
+{% endblock %}
+

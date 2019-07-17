@@ -1,0 +1,115 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block title %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block leftsidebar %}
+        <div class="col-md-2">
+            <div class="card text-center border-0 ">
+                 <a href="#"> <img class="rounded-circle account-img ml-3" src="{{ user.profile.image.url }}"></a>
+
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size:medium;"><i class="fa fa-user ml-1 mr-1" aria-hidden="true"></i>{{ user.first_name }} {{ user.last_name }}</h5>
+                    <p class="card-text"></p>
+                  </div>
+                  <ul class="list-group list-group-flush ">
+                      <li class="list-group-item"><a style="color: #222222" href="{% url 'blog-user-post' user.username %}"><i class="fa fa-plus-circle mr-1" aria-hidden="true"></i>Posts</a></li>
+                    <li class="list-group-item"><i class="fa fa-users mr-1" aria-hidden="true"></i>Circle</li>
+                    <li class="list-group-item"><i class="fa fa-star mr-1" aria-hidden="true"></i>Favourites</li>
+
+
+                    <li class="list-group-item"><i class="fa fa-book mr-1" aria-hidden="true"></i>Catalog</li>
+                    <li class="list-group-item"><i class="fa fa-calendar mr-1" aria-hidden="true"></i>Events</li>
+                    <li class="list-group-item"><i class="fa fa-sticky-note-o mr-1" aria-hidden="true"></i>Notes</li>
+                    <li class="list-group-item"><i class="fa fa-file-image-o mr-1" aria-hidden="true"></i>Archive</li>
+                    <li class="list-group-item"><a style="color: #222222" href="{% url 'blog-profile-edit' %}"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Update</a></li>
+                  </ul>
+                </div>
+        </div>
+
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-8">
+                   <div class="card">
+                      <div class="card-header">
+                            <div class="card-border-0">
+
+                                  <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                    </blockquote>
+                                  </div>
+                            </div>
+                      </div>
+                   </div>
+                </div>
+            </div>
+
+
+        <div class="row mt-4">
+            <div class="col-md-8">
+               <article class="media content-section">
+                   <img class="rounded-circle article-img" src="{{ user.profile.image.url  }}">
+                      <div class="media-body">
+                          <div class="article-metadata">
+                                <a class="mr-1" href="#">{{ user.first_name }} {{ user.last_name }} </a>
+                                <a href="#"><i class="fa fa-star-o float-right" aria-hidden="true"></i></a>
+
+                                <small class="text-muted">help</small>
+                           </div>
+                            <h2><a class="article-title" href="#">help</a></h2>
+                            <p class="article-content">help</p>
+                            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+                            <a class="ml-4" href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+                       </div>
+                </article>
+            </div>
+
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <div class="card text-center mr-4" style="">
+
+                  <div class="card-body">
+                      <ul class="list-group list-group-flush ">
+                            <li class="list-group-item"><i class="fa fa-user mr-3" aria-hidden="true"></i>{{ user.username }}</li>
+                            <li class="list-group-item"><i class="fa fa-phone mr-3" aria-hidden="true"></i>{{ user.profile.phone }}</li>
+
+
+                            <li class="list-group-item"><i class="fa fa-id-card mr-3" aria-hidden="true"></i>{{ user.profile.designation }}</li>
+                            <li class="list-group-item"><i class="fa fa-book mr-3" aria-hidden="true"></i>{{ user.profile.address }}</li>
+
+                      </ul>
+                  </div>
+                </div>
+            </div>
+
+            </div>
+         </div>
+        </div>
+     </div>
+    </div>
+
+
+{% endblock %}
+ </div>
+
+   </div>
+
+
+{% block sidebar %}
+
+{% endblock %}

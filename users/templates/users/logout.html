@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    Logout | ONYC
+{% endblock %}
+
+{% block  leftsidebar %}
+
+{% endblock %}
+
+
+{% block content %}
+       <div class="col-md-8">
+
+
+    <h2>You have been logged out.</h2>
+
+
+    <div class="border-top pt-3">
+        <small class="text-muted">
+
+            <a class="ml-2" href="{% url 'users-login' %}">Sign In</a>
+        </small>
+    </div>
+
+       </div>
+
+
+
+
+
+{% endblock %}

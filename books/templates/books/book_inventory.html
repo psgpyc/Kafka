@@ -1,0 +1,112 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+    {{ block.super }}
+
+{% endblock %}
+
+{% block leftsidebar %}
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+    <div class="row">
+
+        <div class="col-md-2">
+                <div class="card text-center border-0 ">
+                     <a href="#"> <img class="rounded-circle account-img ml-3" src="{% static "booksinventory.jpeg" %}"></a>
+
+                      <div class="card-body">
+                        <h5 class="card-title" style="font-size:medium;"><i class="fa fa-book ml-2" aria-hidden="true"></i><b class="ml-1">Inventory</b></h5>
+                        <p class="card-text"></p>
+                      </div>
+                      <ul class="list-group list-group-flush ">
+                        <li class="list-group-item"><i class="fa fa-plug mr-1" aria-hidden="true"></i>Rented</li>
+                        <li class="list-group-item"><i class="fa fa-archive mr-1" aria-hidden="true"></i>Available</li>
+                        <li class="list-group-item"><i class="fa fa-star mr-1" aria-hidden="true"></i>wishlist</li>
+
+
+                        <li class="list-group-item"><i class="fa fa-book mr-1" aria-hidden="true"></i>Catalog</li>
+                        <li class="list-group-item"><i class="fa fa-calendar mr-1" aria-hidden="true"></i>Events</li>
+                        <li class="list-group-item"><i class="fa fa-sticky-note-o mr-1" aria-hidden="true"></i>Notes</li>
+                        <li class="list-group-item"><i class="fa fa-file-image-o mr-1" aria-hidden="true"></i>Archive</li>
+                        <li class="list-group-item"><i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Update</li>
+                      </ul>
+{#                      <div class="card-body">#}
+{#                        <a href="#" class="card-link">Card link</a>#}
+{#                        <a href="#" class="card-link">Another link</a>#}
+{#                      </div>#}
+
+                </div>
+        </div>
+
+{#    start of cards #}
+
+    <div class="col md-8 ml-2">
+    <div class="row">
+
+
+
+    {% for book in books %}
+
+              <div class="card mb-4 ml-4" style="height:11rem; width: 24rem;">
+
+
+
+          <div class="card-body">
+
+              <article class="media content-section"style="height:9rem; width: 22rem;">
+                   <img class="rounded-circle article-img" src="{{ book.image.url }}">
+                         <div class="media-body">
+                             <div class="article-metadata">
+                                <a class="" href="">{{ book.author_first_name }} {{ book.author_last_name }}
+                                    <a class="ml-6" href="#"><i class="fa fa-star-o" aria-hidden="true"></i>
+                                    </a>
+                                    <span class="float-right">
+                                        <a href="{% url 'blog-profile-edit' %}"><i class="fa fa-info-circle " aria-hidden="true" style="color: black;"></i></a>
+                                        <a href="{% url 'blog-profile-edit' %}"><i class="fa fa-plug " aria-hidden="true" style="color:black; "></i></a>
+                                    </span>
+                                </a>
+
+
+
+                            </div>
+                                <h4 class="article-title">{{ book.title|truncatechars:30 }}</h4>
+                                <p class="article-content">{{ book.genre}} | {{ book.category }} </p>
+
+                        </div>
+            </article>
+          </div>
+        </div>
+
+
+
+
+    {% endfor %}
+
+
+    </div>
+
+       </div>
+
+{#    end of cards#}
+
+
+
+
+    </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block sidebar %}
+
+
+{% endblock %}

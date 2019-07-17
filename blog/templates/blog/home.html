@@ -1,0 +1,144 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+{% block title %}
+    {{  block.super }}
+{% endblock %}
+
+{% block leftsidebar %}
+
+        {{ block.super }}
+{% endblock %}
+
+
+
+{% block content %}
+<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+        <div class="row">
+           <div class="col-md-9">
+                {% for post in posts %}
+                   <article class="media content-section">
+                       <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                          <div class="media-body">
+                              <div class="article-metadata">
+                                    <a class="mr-1" href="{% url 'blog-user-post' post.author.username %}">{{ post.author.first_name }} {{ post.author.last_name }} </a>
+                                    <a href="#"><i class="fa fa-star-o float-right" aria-hidden="true"></i></a>
+
+                                    <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
+                               </div>
+                                <h2><a class="article-title" href="{% url 'blog-details' post.id %}">{{ post.title }}</a></h2>
+                                <p class="article-content">{{ post.content|truncatechars:230 }} </p>
+
+                                      <form method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+
+                                                <input type="hidden" name="ipost" value="{{ post }}">
+                                                <div class="input-group">
+
+                                                    <a href="#"><i class="fa fa-thumbs-o-up fa-lg mt-2" aria-hidden="true"></i></a>
+                                                    <a class="ml-4" href="#"><i class="fa fa-thumbs-o-down fa-lg mt-2" aria-hidden="true"></i></a>
+
+
+
+
+
+                                                <fieldset class="form-group col-md-9 float-right ">
+                                                              <div class="form-group">
+                                                                {{ c_form.text|as_crispy_field }}
+                                                              </div>
+                                                </fieldset>
+                                                     </div>
+                                      </form>
+                                        {% for cmt in comment %}
+                                           {% if cmt.post.title == post.title %}
+                                               {% ifnotequal user cmt.comment_by %}
+                                              <div class="col-md-9 mb-3">
+                                                  <div class="ml-6">
+
+                                                        <img class="rounded-circle comment-img mr-1" src="{{ cmt.comment_by.profile.image.url }}">
+                                                        <a class="" href="">{{ cmt.comment_by.first_name }} {{ cmt.comment_by.last_name }} </a>
+                                                        {{ cmt }}
+
+
+
+                                                  </div>
+                                                </div>
+                                                   {% endifnotequal %}
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                </div>
+
+                    </article>
+
+                {% endfor %}
+
+            <div class="float-right">
+                    {% if posts.has_previous %}
+                        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                        <a class="btn btn-outline-info mb-4" href="?page={{ posts.previous_page_number }}">Previous</a>
+
+
+
+
+                    {% endif %}
+
+                    {% for num in posts.paginator.page_range %}
+                        {% if posts.number == num %}
+                            <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                        {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+                            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if posts.has_next %}
+                          <a class="btn btn-outline-info mb-4" href="?page={{ posts.next_page_number }}">Next</a>
+                          <a class="btn btn-outline-info mb-4" href="?page={{ posts.num_pages}}">Last</a>
+
+                    {% endif %}
+
+
+
+            </div>
+
+
+
+         </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+
+                <div class="card" style="">
+                      <img class="card-img-top img-responsive" style="" src="{% static 'danbrown.jpg' %}" alt="Card image cap">
+                      <div class="card-body">
+                          <ul class="list-group list-group-flush ">
+                        <li class="list-group-item"><i class="fa fa-star-half-o mr-1" aria-hidden="true"></i>3.5/5  - Good reads</li>
+                        <li class="list-group-item"><i class="fa fa-user mr-1 mr-3" aria-hidden="true"></i>Dan Brown</li>
+
+
+                        <li class="list-group-item"><i class="fa fa-calendar mr-1" aria-hidden="true"></i> October 3, 2017</li>
+                        <li class="list-group-item"><i class="fa fa-book mr-1" aria-hidden="true"></i>Sci-Fiction</li>
+
+                      </ul>
+                      </div>
+                    </div>
+
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+        </div>
+
+{% endblock %}
+{%  block sidebar %}
+
+
+{% endblock %}
+
