@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-12">
+   <div class="col-md-12">
     <div class="row">
 
         <div class="col-md-2">
@@ -53,6 +53,9 @@
 
     {% for book in books %}
 
+
+
+
               <div class="card mb-4 ml-4" style="height:11rem; width: 24rem;">
 
 
@@ -64,17 +67,41 @@
                          <div class="media-body">
                              <div class="article-metadata">
                                 <a class="" href="">{{ book.author_first_name }} {{ book.author_last_name }}
-                                    <a class="ml-6" href="#"><i class="fa fa-star-o" aria-hidden="true"></i>
-                                    </a>
-                                    <span class="float-right">
-                                        <a href="{% url 'blog-profile-edit' %}"><i class="fa fa-info-circle " aria-hidden="true" style="color: black;"></i></a>
-                                        <a href="{% url 'blog-profile-edit' %}"><i class="fa fa-plug " aria-hidden="true" style="color:black; "></i></a>
-                                    </span>
+                                    <form action="{% url 'user_add_favourite_books' book.pk request.user.pk %}" method="post">
+                                        {% csrf_token %}
+
+
+                                        <button role="button"
+                                                type="submit">
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                 </button>
+                                    </form>
+
+
                                 </a>
 
 
 
                             </div>
+
+                             <div class="float-right">
+
+                                    <form action="{% url 'user_add_books' book.pk request.user.pk %}" method="post">
+                                        {% csrf_token %}
+
+
+                                        <button role="button"
+                                                type="submit"
+                                                class="btn btn-info">
+                                            <i class="fa fa-plus text-white" aria-hidden="true" style="color: black;"></i>
+                                                 </button>
+                                    </form>
+
+                                </div>
+
+
+
+
                                 <h4 class="article-title">{{ book.title|truncatechars:30 }}</h4>
                                 <p class="article-content">{{ book.genre}} | {{ book.category }} </p>
 
@@ -100,8 +127,6 @@
 
     </div>
     </div>
-
-
 
 
 {% endblock %}

@@ -51,7 +51,7 @@
                                       </form>
                                         {% for cmt in comment %}
                                            {% if cmt.post.title == post.title %}
-                                               {% ifnotequal user cmt.comment_by %}
+
                                               <div class="col-md-9 mb-3">
                                                   <div class="ml-6">
 
@@ -63,7 +63,7 @@
 
                                                   </div>
                                                 </div>
-                                                   {% endifnotequal %}
+
                                             {% endif %}
                                         {% endfor %}
 

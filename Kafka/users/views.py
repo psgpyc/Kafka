@@ -14,6 +14,10 @@ from .forms import (
     ProfileUpdateForm
     )
 from .models import Profile
+from django.contrib.auth.models import User
+from books.models import UserBooks
+
+
 
 
 class Register(View):
@@ -36,30 +40,18 @@ class Register(View):
             messages.success(request, 'Hey {} ! Your account has been created. Please Login to continue.'.format(username))
             return redirect('blog-home')
 
-
         return render(request,template_name=self.template_name, context=self.ctx)
 
-class Profile(ListView):
 
+class ProfileView(ListView):
     template_name = 'users/profile.html'
-
-
-
-
-
-
-
-    def get_queryset(self):
-        pass
-
+    model = User
 
     def get_context_data(self, **kwargs):
-        context = super(Profile,self).get_context_data(**kwargs)
+        context = super(ProfileView,self).get_context_data(**kwargs)
         context['title'] = 'Profile'
+        context['user_books'] = UserBooks.objects.filter(profile__username=self.kwargs['username'])
         return context
-
-
-
 
 
 class ProfileUpdate(View):

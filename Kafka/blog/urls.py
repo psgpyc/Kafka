@@ -6,6 +6,8 @@ from . import views
 urlpatterns = [
 
     path('', login_required(views.Home.as_view()) , name='blog-home'),
+
+
     path('user/<str:username>', login_required(views.UserPostListView.as_view()) , name='blog-user-post'),
     path('post/<int:pk>/',login_required(views.PostDetailView.as_view()), name='blog-details'),
     path('post/new/', login_required(views.PostCreateView.as_view()), name='blog-create'),

@@ -9,7 +9,7 @@ from django.views.generic import (
 )
 from django.views import View
 
-from .models import Post,Comments
+from .models import Post, Comments
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 
@@ -20,6 +20,7 @@ from .forms import CommentForm
 from django.core.paginator import Paginator
 
 from django.contrib import messages
+
 
 class Home(View):
     template_name = 'blog/home.html'
@@ -35,11 +36,11 @@ class Home(View):
         ctx = {
             'title': 'Home',
             'posts': post,
-            'c_form' : c_form,
-            'comment' : cmt,
+            'c_form': c_form,
+            'comment': cmt,
 
         }
-        return render(request, template_name=self.template_name,context=ctx)
+        return render(request, template_name=self.template_name, context=ctx)
 
     def post(self, request , *args , **kwargs):
         form = CommentForm(request.POST)

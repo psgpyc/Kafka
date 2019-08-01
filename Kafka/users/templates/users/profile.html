@@ -1,0 +1,113 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block title %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block leftsidebar %}
+        <div class="col-md-2">
+            <div class="card text-center border-0 ">
+                 <a href="#"> <img class="rounded-circle account-img ml-3" src="{{ user.profile.image.url }}"></a>
+
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size:medium;"><i class="fa fa-user ml-1 mr-1" aria-hidden="true"></i>{{ user.first_name }} {{ user.last_name }}</h5>
+                    <p class="card-text"></p>
+                  </div>
+                  <ul class="list-group list-group-flush ">
+                      <li class="list-group-item"><a style="color: #222222" href="{% url 'blog-user-post' user.username %}"><i class="fa fa-plus-circle mr-1" aria-hidden="true"></i>Posts</a></li>
+                    <li class="list-group-item"><i class="fa fa-users mr-1" aria-hidden="true"></i>Circle</li>
+                    <li class="list-group-item"><i class="fa fa-star mr-1" aria-hidden="true"></i>Favourites</li>
+
+
+                    <li class="list-group-item"><i class="fa fa-book mr-1" aria-hidden="true"></i>Catalog</li>
+                    <li class="list-group-item"><i class="fa fa-calendar mr-1" aria-hidden="true"></i>Events</li>
+                    <li class="list-group-item"><i class="fa fa-sticky-note-o mr-1" aria-hidden="true"></i>Notes</li>
+                    <li class="list-group-item"><i class="fa fa-file-image-o mr-1" aria-hidden="true"></i>Archive</li>
+                    <li class="list-group-item"><a style="color: #222222" href="{% url 'blog-profile-edit' %}"> <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Update</a></li>
+                  </ul>
+                </div>
+        </div>
+
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+        <div class="col-md-10">
+
+        <div class="row mt-4">
+            <div class="col-md-12 p-4">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="book-tab" data-toggle="tab" href="#book" role="tab" aria-controls="book" aria-selected="true">Books</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="favourite-tab" data-toggle="tab" href="#favourite" role="tab" aria-controls="favourite" aria-selected="false">Favourites</a>
+                      </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="book" role="tabpanel" aria-labelledby="book-tab">
+                          <div class="row">
+                              {%  for books in user_books %}
+                                  <div class="col-md-3 col-sm-6 mt-3 mb-3">
+                                      <div class="card">
+                                          <img class="card-img-top" style="max-height: 250px" src="{{ books.book.image.url }}" alt="{{ books.book.title }}">
+                                          <div class="card-body">
+                                            <h5 class="card-title">{{ books.book.title }}</h5>
+                                              <p class="card-text">Author: <small>{{ books.book.author_full_name }}</small></p>
+                                              <p class="card-text">Category: <small>{{ books.book.category }}</small></p>
+                                              <p class="card-text">Genre: <small>{{ books.book.genre }}</small></p>
+                                              <p class="card-text">Year: <small>{{ books.book.year|date }}</small></p>
+                                            <a href="#" class="btn btn-primary">Details</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              {% endfor %}
+                          </div>
+                      </div>
+                      <div class="tab-pane fade" id="favourite" role="tabpanel" aria-labelledby="favourite-tab">
+                          <div class="row">
+                              {%  for books in user_books %}
+                                {% if books.is_Favorite %}
+                                  <div class="col-md-3 col-sm-6 mt-3 mb-3">
+                                      <div class="card">
+                                          <img class="card-img-top" style="max-height: 250px" src="{{ books.book.image.url }}" alt="{{ books.book.title }}">
+                                          <div class="card-body">
+                                            <h5 class="card-title">{{ books.book.title }}</h5>
+                                              <p class="card-text">Author: <small>{{ books.book.author_full_name }}</small></p>
+                                              <p class="card-text">Category: <small>{{ books.book.category }}</small></p>
+                                              <p class="card-text">Genre: <small>{{ books.book.genre }}</small></p>
+                                              <p class="card-text">Year: <small>{{ books.book.year|date }}</small></p>
+                                            <a href="#" class="btn btn-primary">Details</a>
+                                          </div>
+                                      </div>
+                                  </div>
+                                {% endif %}
+                              {% endfor %}
+                          </div>
+                      </div>
+                  </div>
+            </div>
+
+            </div>
+         </div>
+        </div>
+     </div>
+    </div>
+{% endblock %}
+ </div>
+
+   </div>
+
+
+{% block sidebar %}
+
+{% endblock %}

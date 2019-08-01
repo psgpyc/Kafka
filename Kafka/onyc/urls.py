@@ -36,7 +36,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # path('', include('books.urls'))
-    path('profile/<str:username>/', user_views.Profile.as_view(), name='blog-profile'),
+    path('profile/<str:username>/', user_views.ProfileView.as_view(), name='blog-profile'),
     path('profile/update', user_views.ProfileUpdate.as_view(), name='blog-profile-edit'),
 
 
